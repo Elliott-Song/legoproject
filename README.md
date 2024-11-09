@@ -24,10 +24,10 @@ This project contains several components:
 <!-- Grid of images where row is a sub_directory of output, and col is an index -->
 | Part | Image 1 | Image 2 | Image 3 | Image 4 | Image 5 |
 |------|---------|---------|---------|---------|---------|
-| 1x1 Plate | ![1x1 Plate 1](<output/Plate 1x1 (3024)/[0].png>) | ![1x1 Plate 2](<output/Plate 1x1 (3024)/[1].png>) | ![1x1 Plate 3](<output/Plate 1x1 (3024)/[2].png>) | ![1x1 Plate 4](<output/Plate 1x1 (3024)/[3].png>) | ![1x1 Plate 5](<output/Plate 1x1 (3024)/[4].png>) |
-| 1x2 Plate | ![1x2 Plate 1](<output/Plate 1x2 (3023)/[0].png>) | ![1x2 Plate 2](<output/Plate 1x2 (3023)/[1].png>) | ![1x2 Plate 3](<output/Plate 1x2 (3023)/[2].png>) | ![1x2 Plate 4](<output/Plate 1x2 (3023)/[3].png>) | ![1x2 Plate 5](<output/Plate 1x2 (3023)/[4].png>) |
-| 2x2 Plate | ![2x2 Plate 1](<output/Plate 2 x 2 (3022)/[0].png>) | ![2x2 Plate 2](<output/Plate 2 x 2 (3022)/[1].png>) | ![2x2 Plate 3](<output/Plate 2 x 2 (3022)/[2].png>) | ![2x2 Plate 4](<output/Plate 2 x 2 (3022)/[3].png>) | ![2x2 Plate 5](<output/Plate 2 x 2 (3022)/[4].png>) |
-| 2x4 Plate | ![2x4 Plate 1](<output/Plate 2 x 4 (3020)/[0].png>) | ![2x4 Plate 2](<output/Plate 2 x 4 (3020)/[1].png>) | ![2x4 Plate 3](<output/Plate 2 x 4 (3020)/[2].png>) | ![2x4 Plate 4](<output/Plate 2 x 4 (3020)/[3].png>) | ![2x4 Plate 5](<output/Plate 2 x 4 (3020)/[4].png>) |
+| 1x1 Plate | ![1x1 Plate 1](<data/examples/Plate1x1(3024)/0.png>) | ![1x1 Plate 2](<data/examples/Plate1x1(3024)/1.png>) | ![1x1 Plate 3](<data/examples/Plate1x1(3024)/2.png>) | ![1x1 Plate 4](<data/examples/Plate1x1(3024)/3.png>) | ![1x1 Plate 5](<data/examples/Plate1x1(3024)/4.png>) |
+| 1x2 Plate | ![1x2 Plate 1](<data/examples/Plate1x2(3023)/0.png>) | ![1x2 Plate 2](<data/examples/Plate1x2(3023)/1.png>) | ![1x2 Plate 3](<data/examples/Plate1x2(3023)/2.png>) | ![1x2 Plate 4](<data/examples/Plate1x2(3023)/3.png>) | ![1x2 Plate 5](<data/examples/Plate1x2(3023)/4.png>) |
+| 2x2 Plate | ![2x2 Plate 1](<data/examples/Plate2x2(3022)/0.png>) | ![2x2 Plate 2](<data/examples/Plate2x2(3022)/1.png>) | ![2x2 Plate 3](<data/examples/Plate2x2(3022)/2.png>) | ![2x2 Plate 4](<data/examples/Plate2x2(3022)/3.png>) | ![2x2 Plate 5](<data/examples/Plate2x2(3022)/4.png>) |
+| 2x4 Plate | ![2x4 Plate 1](<data/examples/Plate2x4(3020)/0.png>) | ![2x4 Plate 2](<data/examples/Plate2x4(3020)/1.png>) | ![2x4 Plate 3](<data/examples/Plate2x4(3020)/2.png>) | ![2x4 Plate 4](<data/examples/Plate2x4(3020)/3.png>) | ![2x4 Plate 5](<data/examples/Plate2x4(3020)/4.png>) |
 
 
 ## Prerequisites
