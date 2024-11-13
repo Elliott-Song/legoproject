@@ -11,7 +11,7 @@ def render_image(obj_path, output_path):
     bpy.ops.object.delete(use_global=False)
 
     # Create plane as ground
-    bpy.ops.mesh.primitive_plane_add(size=500)
+    bpy.ops.mesh.primitive_plane_add(size=800)
 
     # Set random noisy material for the ground
     material = bpy.data.materials.new(name="GroundMaterial")
@@ -58,6 +58,24 @@ def render_image(obj_path, output_path):
 
     # Assign the material to the plane
     bpy.context.object.data.materials.append(material)
+
+    
+    # Randomly add subdivision and displacement modifier to the plane
+    if random.choice([True, False]):
+        # Add subdivision modifier to the plane
+        bpy.ops.object.modifier_add(type='SUBSURF')
+        bpy.context.object.modifiers["Subdivision"].levels = 5
+
+        # Add displacement modifier to the plane
+        bpy.ops.object.modifier_add(type='DISPLACE')
+        bpy.context.object.modifiers["Displace"].strength = random.uniform(0.0, 70.0)
+        bpy.context.object.modifiers["Displace"].direction = 'Z'
+        bpy.context.object.modifiers["Displace"].mid_level = random.uniform(0.1, 0.2)
+        bpy.context.object.modifiers["Displace"].texture = bpy.data.textures.new(name="Texture", type='CLOUDS')
+        bpy.context.object.modifiers["Displace"].texture.noise_basis = 'VORONOI_F2'
+        bpy.context.object.modifiers["Displace"].texture.noise_scale = random.uniform(0.1, 0.5)
+        bpy.context.object.modifiers["Displace"].texture.intensity = random.uniform(0.1, 0.5)
+        bpy.ops.object.shade_smooth()
 
 
     # Import the .obj file
@@ -135,13 +153,28 @@ def render_image(obj_path, output_path):
     bpy.context.collection.objects.link(sun_obj)
 
     # Randomize world background color
-    bpy.context.scene.world.node_tree.nodes["Background"].inputs[0].default_value = (
-        random.uniform(0.05, 0.3),
-        random.uniform(0.05, 0.3),
-        random.uniform(0.05, 0.3),
-        1
-    )
-    bpy.context.scene.world.node_tree.nodes["Background"].inputs[1].default_value = random.uniform(0.05, 0.6)
+    if random.choice([False]):
+        bpy.context.scene.world.node_tree.nodes["Background"].inputs[0].default_value = (
+            random.uniform(0.05, 0.3),
+            random.uniform(0.05, 0.3),
+            random.uniform(0.05, 0.3),
+            1
+        )
+        bpy.context.scene.world.node_tree.nodes["Background"].inputs[1].default_value = random.uniform(0.05, 0.6)
+    else:
+        # Use random image from /random_images folder as world background
+        world = bpy.data.worlds.new("NewWorld")
+        world.use_nodes = True
+        image_path = "C:/Users/Elliott/3D Objects/Code/legoproject/random_images/" + random.choice(os.listdir("C:/Users/Elliott/3D Objects/Code/legoproject/random_images/"))
+        world.node_tree.nodes.new('ShaderNodeTexEnvironment')
+        world.node_tree.nodes["Environment Texture"].image = bpy.data.images.load(image_path)
+        world.node_tree.nodes.new('ShaderNodeBackground')
+        world.node_tree.links.new(world.node_tree.nodes["Environment Texture"].outputs['Color'], world.node_tree.nodes["Background"].inputs['Color'])
+        world.node_tree.links.new(world.node_tree.nodes["Background"].outputs['Background'], world.node_tree.nodes["World Output"].inputs['Surface'])
+        
+        bpy.context.scene.world = world
+
+
 
     # Randomize sun position, rotation and intensity
     sun_obj.location = (
@@ -223,7 +256,7 @@ def render_image(obj_path, output_path):
     random_camera_position()
 
     # randomize focal length
-    cam.data.lens = random.uniform(40, 74) - max(length, width)/7
+    cam.data.lens = random.uniform(40, 70)
 
     # randomize depth of field
     cam.data.dof.use_dof = random.choice([True, False])
@@ -260,6 +293,13 @@ def render_image(obj_path, output_path):
 
     print("Render complete. Image saved to:", output_path)
 
+    # Clean up materials
+    bpy.data.materials.remove(bpy.data.materials["GroundMaterial"])
+    bpy.data.materials.remove(bpy.data.materials["SphereMaterial"])
+    bpy.data.materials.remove(bpy.data.materials["RandomMaterial"])
+    # Clean up world
+    bpy.data.worlds.remove(world)
+
 parent_dir = "C:/Users/Elliott/3D Objects/Code/legoproject/parts_obj"
 obj_paths = os.listdir(parent_dir)
 
@@ -270,7 +310,7 @@ for obj_path in obj_paths:
     obj_path = os.path.join(parent_dir, obj_path)
     for i in range(starting_index, starting_index + batch_size):
         output_dir_name = os.path.splitext(os.path.basename(obj_path))[0].replace(" ", "")
-        output_path = f"C:/Users/Elliott/3D Objects/Code/legoproject/data/synthetic{output_dir_name}/{[i]}.png"
+        output_path = f"C:/Users/Elliott/3D Objects/Code/legoproject/data/synthetic/{output_dir_name}/{[i]}.png"
         if not os.path.exists(os.path.dirname(output_path)):
             os.makedirs(os.path.dirname(output_path))
         if not os.path.exists(output_path):
