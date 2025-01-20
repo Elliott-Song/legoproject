@@ -1,2 +1,4 @@
 data/synthetic/
 tutorial/
+wandb/
+.ipynb_checkpoints/
