@@ -2,3 +2,4 @@ data/synthetic/
 tutorial/
 wandb/
 .ipynb_checkpoints/
+parts_gltf/

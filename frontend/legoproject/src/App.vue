@@ -76,7 +76,7 @@ function deleteFile() {
   fileUrl.value = null;
   statusText.value = 'Upload an image';
   light_color.value = '#000000';
-  
+
   prediction_primary.value = null;
   prediction_secondary.value = null;
 }
@@ -118,7 +118,8 @@ onLoop(({ delta }) => {
           </Suspense>
         </TresGroup>
 
-        <TresDirectionalLight cast-shadow :position="[0, 2, 1]" :intensity="5" :color="light_color" :key="light_color"/>
+        <TresDirectionalLight cast-shadow :position="[0, 2, 1]" :intensity="5" :color="light_color"
+          :key="light_color" />
       </TresCanvas>
     </div>
     <h1 class="text-5xl font-bold">
@@ -128,18 +129,19 @@ onLoop(({ delta }) => {
       {{ statusText }}
     </div>
     <div v-if="!file" class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-      <div class="flex flex-col justify-center space-y-1 text-center">
-        <label for="file-upload"
+      <label for="file-upload" @drop.prevent="uploadFile" @dragover.prevent
+        class="flex flex-col justify-center space-y-1 text-center">
+        <div
           class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
           <span>browse files</span>
           <input id="file-upload" name="file-upload" type="file" class="sr-only" @change="uploadFile" />
-        </label>
+        </div>
         <p class="">or</p>
         <p class="">drag and drop</p>
         <p class="text-xs text-gray-500">
           PNG, JPG, GIF up to 20MB
         </p>
-      </div>
+      </label>
     </div>
     <div v-else="file" class="mt-2 w-64 h-64 bg-cover rounded text-right"
       :style="{ backgroundImage: 'url(' + fileUrl + ')' }">
@@ -157,7 +159,7 @@ onLoop(({ delta }) => {
         <h2 class="text-xl">Or it could be:</h2>
         <h1 class="text-2xl font-bold">{{ prediction_secondary.label }}</h1>
       </div>
-      
+
     </div>
   </div>
 
